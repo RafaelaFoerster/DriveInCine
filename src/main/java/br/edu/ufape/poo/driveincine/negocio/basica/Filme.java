@@ -1,9 +1,12 @@
 package br.edu.ufape.poo.driveincine.negocio.basica;
 
-	import jakarta.persistence.Entity;
+	import java.util.List;
+
+import jakarta.persistence.Entity;
 	import jakarta.persistence.GeneratedValue;
 	import jakarta.persistence.GenerationType;
 	import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 	
 
 
@@ -21,10 +24,10 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 		private String protagonistas;
 		private String genero;
 		
-		
-		public String getTitulo() {
-			return titulo;
-		}
+		 
+	    @OneToMany
+	    private List<Sessao> Sessao;
+	    
 		
 		public Filme(String titulo, float duracao, int faixaEtaria, String sinopse, String diretor, String capa,
 				String protagonistas, String genero) {
@@ -39,6 +42,10 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 			this.genero = genero;
 		}
 
+		public String getTitulo() {
+			return titulo;
+		}
+		
 		public void setTitulo(String titulo) {
 			this.titulo = titulo;
 		}
