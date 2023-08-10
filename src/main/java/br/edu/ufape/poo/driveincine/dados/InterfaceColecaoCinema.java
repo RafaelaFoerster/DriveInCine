@@ -7,6 +7,4 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Cinema;
 
 @Repository
 public interface InterfaceColecaoCinema 
-	extends JpaRepository<Cinema, Long>{
-
-}
+	extends JpaRepository<Cinema, Long>{}
