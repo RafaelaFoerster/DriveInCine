@@ -11,6 +11,4 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 public interface InterfaceColecaoFilme 
 	extends JpaRepository<Filme, Long>{
 
-	List<Filme> findByTitle(String title);
-
 }
