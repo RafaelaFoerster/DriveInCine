@@ -11,26 +11,26 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 
 @Service
 public class CadastroFilme {
-	@Autowired
-	private InterfaceColecaoFilme colecaoFilme;
+    @Autowired
+    private InterfaceColecaoFilme colecaoFilme;
 
-	public List<Filme> Listafilmes() {
-		return colecaoFilme.findAll();
-	}
+    public List<Filme> listarFilmes() {
+        return colecaoFilme.findAll();
+    }
 
-	public Optional<Filme> ProcurarFilmePeloId(Long id) {
-		return colecaoFilme.findById(id);
-	}
+    public Optional<Filme> procurarFilmePeloId(Long id) {
+        return colecaoFilme.findById(id);
+    }
 
-	public Filme save(Filme entity) {
-		return colecaoFilme.save(entity);
-	}
+    public Filme procurarFilmePeloTitulo(String titulo) {
+        return colecaoFilme.findByTitulo(titulo);
+    }
 
-	public void ExcluirFilme(Filme entity) {
-		colecaoFilme.delete(entity);
-	}
+    public Filme salvarFilme(Filme entity) {
+        return colecaoFilme.save(entity);
+    }
 
-
-
-    
+    public void excluirFilme(Filme entity) {
+        colecaoFilme.delete(entity);
+    }
 }

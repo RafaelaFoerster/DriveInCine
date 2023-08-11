@@ -14,7 +14,9 @@ public abstract class Vaga {
     private int linha;
     private boolean ocupado;
     
-    
+    public Vaga() {
+        
+    }
 	public Vaga(long id, String coluna, int linha, boolean ocupado) {
 		super();
 		this.id = id;
