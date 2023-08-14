@@ -25,6 +25,7 @@ class CadastroVagaTest {
         assertDoesNotThrow(() -> cadastroVaga.atualizarStatusVaga(vagaFinal.getId(), true));
     }
 
+
     @Test
     void testeAtualizarStatusVagaOcupadaDuplicada() {
         Vaga vaga = new VagaFront(2, "B", 2, true);

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoSessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
 
 import java.util.List;
 
@@ -25,7 +26,10 @@ public class CadastroSessao {
         colecaoSessao.delete(sessao);
     }
 
-    public Sessao salvarSessao(Sessao sessao) {
+    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
+        if (procurarSessaoPeloId(sessao.getId()) != null) {
+            throw new SessaoJaExistenteException(sessao.getId());
+        }
         return colecaoSessao.save(sessao);
     }
 }
