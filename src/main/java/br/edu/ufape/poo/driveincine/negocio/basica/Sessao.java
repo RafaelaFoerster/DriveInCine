@@ -15,11 +15,11 @@ public class Sessao {
     private float horario;
     private String diaExibicao;
 
-    //@OneToMany
-    //private List<Vaga> vagas;
+    @OneToMany
+    private List<Vaga> vagas;
     
-    //@OneToMany
-    //private List<Ingresso> ingressos;
+    @OneToMany
+    private List<Ingresso> ingressos;
     
     
     
@@ -27,8 +27,8 @@ public class Sessao {
 		this.id = id;
 		this.horario = horario;
 		this.diaExibicao = diaExibicao;
-		//this.vagas = vagas;
-		//this.ingressos = ingressos;
+		this.vagas = vagas;
+		this.ingressos = ingressos;
 	}
 
 	public long getId() {
@@ -55,20 +55,20 @@ public class Sessao {
 		this.diaExibicao = diaExibicao;
 	}
 
-	//public List<Vaga> getVagas() {
-	//	return vagas;
-	//}
+	public List<Vaga> getVagas() {
+		return vagas;
+	}
 
-	//public void setVagas(List<Vaga> vagas) {
-		//this.vagas = vagas;
-	//}
+	public void setVagas(List<Vaga> vagas) {
+		this.vagas = vagas;
+	}
 
-	//public List<Ingresso> getIngressos() {
-		//return ingressos;
-	//}
+	public List<Ingresso> getIngressos() {
+		return ingressos;
+	}
 
-	//public void setIngressos(List<Ingresso> ingressos) {
-		//this.ingressos = ingressos;
-	//}
+	public void setIngressos(List<Ingresso> ingressos) {
+		this.ingressos = ingressos;
+	}
 
 }
