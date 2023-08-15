@@ -26,10 +26,16 @@ public class CadastroSessao {
         colecaoSessao.delete(sessao);
     }
 
+    public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) {
+        return colecaoSessao.findByHorarioAndDiaExibicao(horario, diaExibicao);
+    }
+   
     public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
-        if (procurarSessaoPeloId(sessao.getId()) != null) {
-            throw new SessaoJaExistenteException(sessao.getId());
+        List<Sessao> sessoesExistentes = procurarSessoesPeloHorarioEData(sessao.getHorario(), sessao.getDiaExibicao());
+        if (!sessoesExistentes.isEmpty()) {
+            throw new SessaoJaExistenteException(sessao.getHorario(), sessao.getDiaExibicao());
         }
         return colecaoSessao.save(sessao);
     }
+
 }

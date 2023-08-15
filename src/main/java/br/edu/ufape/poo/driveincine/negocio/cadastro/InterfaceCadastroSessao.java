@@ -13,5 +13,6 @@ public interface InterfaceCadastroSessao {
     void excluirSessao(Sessao sessao);
 
     Sessao salvarSessao(Sessao sessao);
-
+    
+    List<Sessao> findByHorarioAndDiaExibicao(float horario, String diaExibicao);
 }
