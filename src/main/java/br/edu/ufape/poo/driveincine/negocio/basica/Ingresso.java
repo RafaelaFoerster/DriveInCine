@@ -38,12 +38,4 @@ public class Ingresso {
 	public void setValorDoIngresso(float valorDoIngresso) {
 		this.valorDoIngresso = valorDoIngresso;
 	}
-	public Ingresso(String qrcode, String placaDoCarro, float valorDoIngresso) {
-		super();
-		this.qrcode = qrcode;
-		this.placaDoCarro = placaDoCarro;
-		this.valorDoIngresso = valorDoIngresso;
-	}
-	
-	
 }
