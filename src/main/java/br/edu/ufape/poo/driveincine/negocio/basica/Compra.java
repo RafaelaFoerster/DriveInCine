@@ -40,10 +40,4 @@ public class Compra {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Compra(float valorTotal, Date dataEmissao, String status) {
-		super();
-		this.valorTotal = valorTotal;
-		this.dataEmissao = dataEmissao;
-		this.status = status;
-	}
 }
