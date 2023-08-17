@@ -13,7 +13,7 @@ public interface InterfaceCadastroVaga {
 
     List<Vaga> listarVagas();
 
-    void QuantidadeDeVagas();
+    int QuantidadeDeVagas();
 
     void removerVaga(Vaga vaga);
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoVaga;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
 
 @Service
@@ -30,8 +31,11 @@ public class CadastroVaga {
 		return colecaoVaga.count();
 	}
 
-	public void RemoverVaga(Vaga entity) {
-		colecaoVaga.delete(entity);
+	public void RemoverVaga(Vaga entity) throws VagaNãoExisteException {
+	    if (!colecaoVaga.existsById(entity.getId())) {
+	        throw new VagaNãoExisteException();
+	    }
+	    colecaoVaga.delete(entity);
 	}
 
 	public Vaga atualizarStatusVaga(long id, boolean ocupado)throws VagaOcupadaException {
