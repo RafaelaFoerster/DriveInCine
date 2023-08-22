@@ -18,6 +18,12 @@ public class Ingresso {
 		
 	}
 	
+	public Ingresso(String qrcode, String placaDoCarro, float valorDoIngresso) {
+		super();
+		this.qrcode = qrcode;
+		this.placaDoCarro = placaDoCarro;
+		this.valorDoIngresso = valorDoIngresso;
+	}
 	public long getId() {
 		return id;
 	}

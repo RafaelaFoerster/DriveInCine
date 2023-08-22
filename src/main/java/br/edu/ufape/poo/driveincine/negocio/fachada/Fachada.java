@@ -6,14 +6,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroIngresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroVaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteException;
 
 public class Fachada {
 
@@ -22,6 +25,9 @@ public class Fachada {
 
     @Autowired
     private InterfaceCadastroVaga cadastroVaga;
+    
+    @Autowired
+    private InterfaceCadastroIngresso cadastroIngresso;
 
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
@@ -73,6 +79,31 @@ public class Fachada {
         return cadastroVaga.localizarVagaPorId(id);
     }
     
-    
+	public Ingresso salvarIngresso(Ingresso entity) {
+		return cadastroIngresso.salvarIngresso(entity);
+	}
 
+	public List<Ingresso> listarIngressos() 
+			throws IngressoNaoExisteException {
+				List<Ingresso> ing = cadastroIngresso.listarIngressos();
+				if (ing.size() == 0) {
+					throw new IngressoNaoExisteException();
+				}
+				return ing;
+			}
+
+	public void removerIngresso(Long id) {
+		cadastroIngresso.removerIngresso(id);
+	}
+
+	public void removerIngresso(Ingresso entity) {
+		cadastroIngresso.removerIngresso(entity);
+	}
+	
+	public Optional<Ingresso> localizarIngressoId(long id) {
+		return cadastroIngresso.localizarIngressoId(id);
+	}
 }
+
+
+
