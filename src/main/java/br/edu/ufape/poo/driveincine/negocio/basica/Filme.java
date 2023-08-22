@@ -26,6 +26,10 @@ import jakarta.persistence.OneToMany;
 	    @OneToMany
 	    private List<Sessao> Sessao;
 	    
+	    public Filme() {
+	    	
+	    }
+	    
 		
 		public Filme(String titulo, float duracao, int faixaEtaria, String sinopse, String diretor, String capa,
 				String protagonistas, String genero) {

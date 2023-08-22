@@ -14,6 +14,10 @@ public class Ingresso {
 	private String placaDoCarro;
 	private float valorDoIngresso;
 	
+	public Ingresso() {
+		
+	}
+	
 	public long getId() {
 		return id;
 	}
