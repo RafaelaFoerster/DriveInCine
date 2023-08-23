@@ -1,5 +1,8 @@
 package br.edu.ufape.poo.driveincine.negocio.cadastro;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +36,7 @@ public class CadastroIngresso {
 		colecaoIngresso.delete(entity);
 	}
 	
-	public Ingresso listaIngresso(long id) {
-		Ingresso ing = ingresso.findById(id) .orElse(null);
-		return ing;
+	public Optional<Ingresso> procurarIngressoId(long id) {
+		return colecaoIngresso.findById(id);
 	}
 }

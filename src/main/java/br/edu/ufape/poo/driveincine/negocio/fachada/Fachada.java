@@ -100,8 +100,8 @@ public class Fachada {
 		cadastroIngresso.removerIngresso(entity);
 	}
 	
-	public Optional<Ingresso> localizarIngressoId(long id) {
-		return cadastroIngresso.localizarIngressoId(id);
+	public Optional<Ingresso> procurarIngressoId(long id) {
+		return cadastroIngresso.procurarIngressoId(id);
 	}
 }
 
