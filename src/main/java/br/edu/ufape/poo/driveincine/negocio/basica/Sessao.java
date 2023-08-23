@@ -21,14 +21,15 @@ public class Sessao {
     @OneToMany
     private List<Ingresso> ingressos;
     
-    
+    public Sessao() {
+    	
+    }
     
 	public Sessao(long id, float horario, String diaExibicao) {
 		this.id = id;
 		this.horario = horario;
 		this.diaExibicao = diaExibicao;
-		this.vagas = vagas;
-		this.ingressos = ingressos;
+
 	}
 
 	public long getId() {

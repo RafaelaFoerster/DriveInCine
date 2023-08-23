@@ -3,6 +3,7 @@ package br.edu.ufape.poo.driveincine.negocio.cadastro;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
 import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 
 public interface InterfaceCadastroFilme {

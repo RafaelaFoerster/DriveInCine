@@ -3,6 +3,9 @@ package br.edu.ufape.poo.driveincine.negocio.cadastro;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
 
 public interface InterfaceCadastroVaga {
@@ -11,9 +14,6 @@ public interface InterfaceCadastroVaga {
 
     void atualizarVaga(Vaga vaga);
 
-    List<Vaga> listarVagas();
-
-    int QuantidadeDeVagas();
 
     void removerVaga(Vaga vaga);
 

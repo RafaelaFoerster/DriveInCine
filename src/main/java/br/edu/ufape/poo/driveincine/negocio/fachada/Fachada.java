@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.driveincine.negocio.fachada;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
+import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroVaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
@@ -60,14 +62,6 @@ public class Fachada {
         cadastroVaga.atualizarVaga(vaga);
     }
 
-    public List<Vaga> listarVagas() {
-        return cadastroVaga.listarVagas();
-    }
-
-    public long quantidadeDeVagas() {
-        return cadastroVaga.QuantidadeDeVagas();
-    }
-
     public void removerVaga(Vaga vaga) throws VagaNãoExisteException {
         if (!cadastroVaga.localizarVagaPorId(vaga.getId()).isPresent()) {
             throw new VagaNãoExisteException();
@@ -78,7 +72,7 @@ public class Fachada {
     public Optional<Vaga> localizarVagaPorId(long id) {
         return cadastroVaga.localizarVagaPorId(id);
     }
+    
+    
+
 }
-
-
-

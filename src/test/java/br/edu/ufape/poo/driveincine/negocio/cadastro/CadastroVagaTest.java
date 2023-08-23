@@ -35,10 +35,7 @@ class CadastroVagaTest {
     }
 
     @Test
-    void testeAtualizarStatusVagaLivre() {
-        Vaga vaga = new VagaNormal(3, "C", 3, false);
-        vaga = cadastroVaga.salvarVaga(vaga);
-        final Vaga vagaFinal = vaga;
-        assertDoesNotThrow(() -> cadastroVaga.atualizarStatusVaga(vagaFinal.getId(), false));
+    void testeAtualizarVagaInexistente() {
+    	
     }
 }

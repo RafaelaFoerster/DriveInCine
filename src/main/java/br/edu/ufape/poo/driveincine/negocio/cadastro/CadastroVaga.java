@@ -23,20 +23,14 @@ public class CadastroVaga {
         return colecaoVaga.save(vaga);
     }
     
-    public List<Vaga> ListarVagas() {
-		return colecaoVaga.findAll();
-	}
-    
-	public long QuantidadeDeVagas() {
-		return colecaoVaga.count();
-	}
-
+ 
 	public void RemoverVaga(Vaga entity) throws VagaNãoExisteException {
 	    if (!colecaoVaga.existsById(entity.getId())) {
 	        throw new VagaNãoExisteException();
 	    }
 	    colecaoVaga.delete(entity);
 	}
+	
 
 	public Vaga atualizarStatusVaga(long id, boolean ocupado)throws VagaOcupadaException {
     	Vaga vaga = colecaoVaga.findById(id).orElse(null);

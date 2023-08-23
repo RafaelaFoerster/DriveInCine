@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class VagaNormal extends Vaga {
+	
 	public VagaNormal() {
 		
 	}

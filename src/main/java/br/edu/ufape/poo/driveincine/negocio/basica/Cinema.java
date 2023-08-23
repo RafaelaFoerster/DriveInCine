@@ -16,6 +16,10 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 
 	    @OneToMany
 	    private List<Filme> filmes;
+	    
+	    public Cinema() {
+	    	
+	    }
 
 	    public String getNome() {
 	        return nome;

@@ -16,6 +16,10 @@ public class Compra {
 	private Date dataEmissao;
 	private String status;
 	
+	public Compra() {
+		
+	}
+	
 	public long getId() {
 		return id;
 	}

@@ -23,7 +23,7 @@ class CadastroSessaoTest {
 
     @Test
     void testeSalvarSessaoNaoExistente() {
-        Sessao sessao = new Sessao(2, 20.0f, "2023-07-28");
+        Sessao sessao = new Sessao(2, 18.5f, "2023-07-27");
         assertDoesNotThrow(() -> cadastroSessao.salvarSessao(sessao));
     }
 }

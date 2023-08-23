@@ -1,5 +1,7 @@
 package br.edu.ufape.poo.driveincine.negocio.basica;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -48,6 +50,9 @@ public abstract class Vaga {
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
+	public List<Vaga> listarVagasPorSessao(Sessao sessao) {
+        return sessao.getVagas();
+    }
     
     
     
