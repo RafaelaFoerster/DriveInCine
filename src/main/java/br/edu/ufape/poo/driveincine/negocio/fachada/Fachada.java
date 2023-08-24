@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoCompra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
