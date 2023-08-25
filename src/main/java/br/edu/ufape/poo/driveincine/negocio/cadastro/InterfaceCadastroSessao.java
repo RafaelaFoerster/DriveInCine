@@ -1,11 +1,10 @@
 package br.edu.ufape.poo.driveincine.negocio.cadastro;
 
-import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
-
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 
 public interface InterfaceCadastroSessao {
 
@@ -13,9 +12,10 @@ public interface InterfaceCadastroSessao {
 
     List<Sessao> listarTodasSessoes();
 
-    void excluirSessao(Sessao sessao);
+    void excluirSessao(long Id) throws SessaoNaoExisteException;
 
-    Sessao salvarSessao(Sessao sessao);
-    
-    List<Sessao> findByHorarioAndDiaExibicao(float horario, String diaExibicao);
+    List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao);
+
+    Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException;
+
 }

@@ -2,19 +2,20 @@ package br.edu.ufape.poo.driveincine.negocio.fachada;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
-import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroVaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
 
+@Service
 public class Fachada {
 
     @Autowired
@@ -31,48 +32,33 @@ public class Fachada {
         return cadastroSessao.listarTodasSessoes();
     }
 
-    public void excluirSessao(Sessao sessao) {
-        cadastroSessao.excluirSessao(sessao);
-    }
-
-    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
-        List<Sessao> sessoesExistentes = cadastroSessao.findByHorarioAndDiaExibicao(sessao.getHorario(), sessao.getDiaExibicao());
-        if (!sessoesExistentes.isEmpty()) {
-            throw new SessaoJaExistenteException(sessao.getHorario(), sessao.getDiaExibicao());
-        }
-        return cadastroSessao.salvarSessao(sessao);
+    public void excluirSessao(long id) throws SessaoNaoExisteException {
+        cadastroSessao.excluirSessao(id);
     }
 
     public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) {
-        return cadastroSessao.findByHorarioAndDiaExibicao(horario, diaExibicao);
+        return cadastroSessao.procurarSessoesPeloHorarioEData(horario, diaExibicao);
+    }
+
+    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
+        return cadastroSessao.salvarSessao(sessao);
     }
 
     public Vaga procurarVagaPeloId(long id) {
-        return cadastroVaga.localizarVagaPorId(id).orElse(null);
+        return cadastroVaga.procurarVagaPeloId(id);
+    }
+    public Vaga salvarVaga(Vaga vaga, long sessaoId) throws SessaoNaoExisteException {
+    	return cadastroVaga.salvarVaga(vaga, sessaoId);
+    }
+    public void removerVaga(Long id) throws VagaNãoExisteException {
+        cadastroVaga.removerVagaPorId(id);
     }
 
-    public Vaga salvarVaga(Vaga vaga) {
-        return cadastroVaga.salvarVaga(vaga);
+    public Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException {
+        return cadastroVaga.atualizarStatusVaga(id, ocupado);
     }
 
-    public void atualizarVaga(Vaga vaga) throws VagaOcupadaException {
-        if (vaga.isOcupado()) {
-            throw new VagaOcupadaException(vaga.getId());
-        }
-        cadastroVaga.atualizarVaga(vaga);
-    }
-
-    public void removerVaga(Vaga vaga) throws VagaNãoExisteException {
-        if (!cadastroVaga.localizarVagaPorId(vaga.getId()).isPresent()) {
-            throw new VagaNãoExisteException();
-        }
-        cadastroVaga.removerVaga(vaga);
-    }
-
-    public Optional<Vaga> localizarVagaPorId(long id) {
-        return cadastroVaga.localizarVagaPorId(id);
-    }
-    
-    
 
 }
+
+

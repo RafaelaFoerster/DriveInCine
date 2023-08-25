@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoSessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 
 import java.util.List;
 
 @Service
-public class CadastroSessao {
+public class CadastroSessao implements InterfaceCadastroSessao {
+	
     @Autowired
     private InterfaceColecaoSessao colecaoSessao;
 
@@ -21,10 +23,18 @@ public class CadastroSessao {
     public List<Sessao> listarTodasSessoes() {
         return colecaoSessao.findAll();
     }
-
-    public void excluirSessao(Sessao sessao) {
-        colecaoSessao.delete(sessao);
+    
+    public void excluirSessao(long Id) throws SessaoNaoExisteException {
+        Sessao sessao = procurarSessaoPeloId(Id);
+        
+        if (sessao != null) {
+            colecaoSessao.delete(sessao);
+        } else {
+            throw new SessaoNaoExisteException();
+        }
     }
+
+
 
     public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) {
         return colecaoSessao.findByHorarioAndDiaExibicao(horario, diaExibicao);
