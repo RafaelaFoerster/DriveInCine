@@ -155,8 +155,6 @@ public class Fachada {
 			ingressosGerados.add(novo);
 			cadastroIngresso.salvarIngresso(novo);
 		}
-		
-		
 		return ingressosGerados;
 	}
 }
