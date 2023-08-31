@@ -16,9 +16,6 @@ public class Sessao {
     private String diaExibicao;
 
     @OneToMany
-    private List<Vaga> vagas;
-    
-    @OneToMany
     private List<Ingresso> ingressos;
     
     public Sessao() {
@@ -56,13 +53,6 @@ public class Sessao {
 		this.diaExibicao = diaExibicao;
 	}
 
-	public List<Vaga> getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(List<Vaga> vagas) {
-		this.vagas = vagas;
-	}
 
 	public List<Ingresso> getIngressos() {
 		return ingressos;

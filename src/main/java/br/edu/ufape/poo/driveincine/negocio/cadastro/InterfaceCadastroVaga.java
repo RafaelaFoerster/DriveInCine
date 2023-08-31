@@ -1,22 +1,18 @@
 package br.edu.ufape.poo.driveincine.negocio.cadastro;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
 
 public interface InterfaceCadastroVaga {
 
-    Vaga salvarVaga(Vaga vaga);
+    Vaga procurarVagaPeloId(long id);
 
-    void atualizarVaga(Vaga vaga);
+    Vaga salvarVaga(Vaga vaga, long sessaoId) throws SessaoNaoExisteException;
 
+    void removerVagaPorId(long id) throws VagaNãoExisteException;
 
-    void removerVaga(Vaga vaga);
-
-    Optional<Vaga> localizarVagaPorId(long id);
+    Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException;
 
 }
