@@ -15,9 +15,14 @@ public class Compra {
 	private float valorTotal;
 	private Date dataEmissao;
 	private String status;
+
+	public Compra() {}
 	
-	public Compra() {
-		
+	public Compra(float valorTotal, Date dataEmissao, String status) {
+		super();
+		this.valorTotal = valorTotal;
+		this.dataEmissao = dataEmissao;
+		this.status = status;
 	}
 	
 	public long getId() {
