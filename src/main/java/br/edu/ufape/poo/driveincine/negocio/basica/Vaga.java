@@ -18,8 +18,9 @@ public abstract class Vaga {
     private String coluna;
     private int linha;
     private boolean ocupado;
+    private double valor;
     
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name = "sessao_id")
     private Sessao sessao;
 
@@ -64,7 +65,12 @@ public abstract class Vaga {
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
-
+    public double getValor() {
+		return valor;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
     
     
     

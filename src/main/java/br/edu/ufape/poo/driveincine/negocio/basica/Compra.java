@@ -1,7 +1,7 @@
 package br.edu.ufape.poo.driveincine.negocio.basica;
 
-import java.sql.Date;
 
+import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +12,7 @@ public class Compra {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private float valorTotal;
+	private double valorTotal;
 	private Date dataEmissao;
 	private String status;
 
@@ -31,10 +31,10 @@ public class Compra {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public float getValorTotal() {
+	public double getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(float valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	public Date getDataEmissao() {

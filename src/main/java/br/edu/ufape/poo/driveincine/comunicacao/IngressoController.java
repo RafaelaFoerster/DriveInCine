@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ufape.poo.driveincine.dto.IngressoDto;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.fachada.Fachada;
@@ -29,8 +30,10 @@ public class IngressoController {
 	}
 	
 	@PostMapping("/ingresso")
-	public Ingresso cadastrarIngresso(@RequestBody Ingresso ing) {
-		return fachada.salvarIngresso(ing);
+	public String comprarIngresso(@RequestBody IngressoDto ing) {
+		fachada.comprarIngresso(ing);
+		
+		return "ok";
 	}
 	
 	@PatchMapping("/ingresso/{id}")

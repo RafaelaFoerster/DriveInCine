@@ -17,6 +17,8 @@ public class Sessao {
 
     @OneToMany
     private List<Ingresso> ingressos;
+    @OneToMany
+    private List<Vaga> vagas;
     
     public Sessao() {
     	

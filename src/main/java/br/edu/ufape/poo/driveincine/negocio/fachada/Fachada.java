@@ -1,11 +1,14 @@
 package br.edu.ufape.poo.driveincine.negocio.fachada;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.poo.driveincine.dto.IngressoDto;
 import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
@@ -112,6 +115,43 @@ public class Fachada {
 	
 	public Optional<Compra> procurarCompraId(long id) {
 		return cadastroCompra.procurarCompraId(id);
+	}
+	
+	public List<Ingresso> comprarIngresso(IngressoDto ing) {
+		Sessao sess = cadastroSessao.procurarSessaoPeloId(ing.getSessao());
+		List<Vaga> vagas = new ArrayList<Vaga>();
+		List<Ingresso> ingressosGerados = new ArrayList<Ingresso>();
+		double valorTotal=0;
+		
+		for (int i=0; i<ing.getVagas().size();i++) {
+			Vaga vagaTemp = cadastroVaga.procurarVagaPeloId(i);
+			vagas.add(vagaTemp);
+			valorTotal+=vagaTemp.getValor();
+			vagaTemp.setOcupado(true);
+		}
+		
+		//gerando compra
+		Compra compra = new Compra();
+		compra.setStatus("Aprovado");
+		Date data = new Date();
+		compra.setDataEmissao(data);
+		compra.setValorTotal(valorTotal);
+		
+		//gerando Ingresso por vaga
+		for (int i=0; i<vagas.size();i++) {
+			Ingresso novo = new Ingresso();
+			novo.setQrcode("1234");
+			novo.setPlacaDoCarro(ing.getPlacaDoCarro());
+			novo.setSessao(sess);
+			novo.setCompra(compra);
+			novo.setVaga(vagas.get(i));
+			
+			ingressosGerados.add(novo);
+			cadastroIngresso.salvarIngresso(novo);
+		}
+		
+		
+		return ingressosGerados;
 	}
 }
 
