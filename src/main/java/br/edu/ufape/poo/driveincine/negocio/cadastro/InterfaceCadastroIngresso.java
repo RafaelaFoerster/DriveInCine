@@ -12,7 +12,7 @@ public interface InterfaceCadastroIngresso {
 
 	List<Ingresso> listarIngressos() throws IngressoNaoExisteException;
 
-	void removerIngresso(Long id) throws IngressoNaoExisteException;
+	void removerIngressoId(Long id) throws IngressoNaoExisteException;
 
 	void removerIngresso(Ingresso entity);
 

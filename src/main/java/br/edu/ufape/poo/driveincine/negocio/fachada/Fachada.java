@@ -21,6 +21,7 @@ import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteE
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.CompraNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteException;
 
 @Service
@@ -85,8 +86,8 @@ public class Fachada {
 				return ing;
 			}
 
-	public void removerIngresso(Long id) throws IngressoNaoExisteException {
-		cadastroIngresso.removerIngresso(id);
+	public void removerIngressoId(Long id) throws IngressoNaoExisteException {
+		cadastroIngresso.removerIngressoId(id);
 	}
 
 	public void removerIngresso(Ingresso entity) {
@@ -97,23 +98,28 @@ public class Fachada {
 		return cadastroIngresso.procurarIngressoId(id);
 	}
 	
-	public List<Compra> listarCompras() {
-		return cadastroCompra.listarCompras();
-	}
+	public List<Compra> listarCompras() 
+			throws CompraNaoExisteException {
+				List<Compra> comp = cadastroCompra.listarCompras();
+				if(comp.size() == 0) {
+					throw new CompraNaoExisteException();
+				}
+				return comp;
+		}
 
 	public Compra salvarCompra(Compra entity) {
 		return cadastroCompra.salvarCompra(entity);
 	}
 
-	public void removerCompra(Long id) {
-		cadastroCompra.removerCompra(id);
+	public void removerCompraId(Long id) throws CompraNaoExisteException {
+		cadastroCompra.removerCompraId(id);
 	}
 
 	public void removerCompra(Compra entity) {
 		cadastroCompra.removerCompra(entity);
 	}
 	
-	public Optional<Compra> procurarCompraId(long id) {
+	public Optional<Compra> procurarCompraId(long id) throws CompraNaoExisteException {
 		return cadastroCompra.procurarCompraId(id);
 	}
 	
