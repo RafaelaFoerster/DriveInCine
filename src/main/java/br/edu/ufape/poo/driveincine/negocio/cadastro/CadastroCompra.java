@@ -10,7 +10,7 @@ import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoCompra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 
 @Service
-public class CadastroCompra {
+public class CadastroCompra implements InterfaceCadastroCompra{
 	@Autowired
 	private InterfaceColecaoCompra colecaoCompra;
 	

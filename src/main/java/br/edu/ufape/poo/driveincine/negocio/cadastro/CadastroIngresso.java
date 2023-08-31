@@ -11,7 +11,7 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteException;
 
 @Service
-public class CadastroIngresso {
+public class CadastroIngresso implements InterfaceCadastroIngresso {
 	@Autowired
 	private InterfaceColecaoIngresso colecaoIngresso;
 
