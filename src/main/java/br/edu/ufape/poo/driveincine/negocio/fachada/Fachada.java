@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.driveincine.negocio.fachada;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,12 +10,7 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
-<<<<<<< HEAD
-import br.edu.ufape.poo.driveincine.negocio.cadastro.CadastroCompra;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroIngresso;
-import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
-=======
->>>>>>> branch 'master' of https://github.com/RafaelaFoerster/DriveInCine.git
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroVaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroCompra;
@@ -72,22 +68,11 @@ public class Fachada {
     public Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException {
         return cadastroVaga.atualizarStatusVaga(id, ocupado);
     }
-
-
-}
-
-<<<<<<< HEAD
-    public Optional<Vaga> localizarVagaPorId(long id) {
-        return cadastroVaga.localizarVagaPorId(id);
-    }
     
 	public Ingresso salvarIngresso(Ingresso entity) {
 		return cadastroIngresso.salvarIngresso(entity);
 	}
-=======
->>>>>>> branch 'master' of https://github.com/RafaelaFoerster/DriveInCine.git
-
-<<<<<<< HEAD
+	
 	public List<Ingresso> listarIngressos() 
 			throws IngressoNaoExisteException {
 				List<Ingresso> ing = cadastroIngresso.listarIngressos();
@@ -130,7 +115,3 @@ public class Fachada {
 	}
 }
 
-
-
-=======
->>>>>>> branch 'master' of https://github.com/RafaelaFoerster/DriveInCine.git
