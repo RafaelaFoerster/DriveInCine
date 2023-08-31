@@ -28,7 +28,10 @@ public class CadastroIngresso {
 			return ing;
 		}
 
-	public void removerIngresso(Long id) {
+	public void removerIngressoId(Long id) throws IngressoNaoExisteException {
+		if (!colecaoIngresso.existsById(id)) {
+			throw new IngressoNaoExisteException();
+		}
 		colecaoIngresso.deleteById(id);
 	}
 
@@ -36,7 +39,10 @@ public class CadastroIngresso {
 		colecaoIngresso.delete(entity);
 	}
 	
-	public Optional<Ingresso> procurarIngressoId(long id) {
+	public Optional<Ingresso> procurarIngressoId(long id) throws IngressoNaoExisteException {
+		if (!colecaoIngresso.existsById(id)) {
+			throw new IngressoNaoExisteException();
+		}
 		return colecaoIngresso.findById(id);
 	}
 }

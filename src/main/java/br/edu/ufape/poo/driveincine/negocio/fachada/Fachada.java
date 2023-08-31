@@ -85,7 +85,7 @@ public class Fachada {
 				return ing;
 			}
 
-	public void removerIngresso(Long id) {
+	public void removerIngresso(Long id) throws IngressoNaoExisteException {
 		cadastroIngresso.removerIngresso(id);
 	}
 
@@ -93,7 +93,7 @@ public class Fachada {
 		cadastroIngresso.removerIngresso(entity);
 	}
 	
-	public Optional<Ingresso> procurarIngressoId(long id) {
+	public Optional<Ingresso> procurarIngressoId(long id) throws IngressoNaoExisteException {
 		return cadastroIngresso.procurarIngressoId(id);
 	}
 	
