@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoSessao;
+import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
+import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
+import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
+import br.edu.ufape.poo.driveincine.negocio.basica.VagaNormal;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +20,9 @@ public class CadastroSessao implements InterfaceCadastroSessao {
 	
     @Autowired
     private InterfaceColecaoSessao colecaoSessao;
+    
+    @Autowired
+    private CadastroVaga cadastroVaga; 
 
     public Sessao procurarSessaoPeloId(long id) {
         return colecaoSessao.findById(id).orElse(null);
@@ -34,7 +42,9 @@ public class CadastroSessao implements InterfaceCadastroSessao {
         }
     }
 
-
+    public List<Sessao> procurarSessoesPelofilme(Filme filme) {
+        return colecaoSessao.findByFilme(filme);
+    }
 
     public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) {
         return colecaoSessao.findByHorarioAndDiaExibicao(horario, diaExibicao);
@@ -45,7 +55,31 @@ public class CadastroSessao implements InterfaceCadastroSessao {
         if (!sessoesExistentes.isEmpty()) {
             throw new SessaoJaExistenteException(sessao.getHorario(), sessao.getDiaExibicao());
         }
-        return colecaoSessao.save(sessao);
-    }
 
-}
+        Sessao novaSessao = colecaoSessao.save(sessao);
+
+        novaSessao.setVagas(new ArrayList<>()); 
+
+        char[] colunas = {'A', 'B', 'C', 'D', 'E'};
+        
+        for (int linha = 1; linha <= 6; linha++) {
+            for (char coluna : colunas) {
+                Vaga vaga;
+                if (coluna == 'A' || coluna == 'B') {
+                    vaga = new VagaFront();
+                } else {
+                    vaga = new VagaNormal();
+                }
+                vaga.setSessao(novaSessao); 
+                
+                cadastroVaga.salvarVaga(vaga); 
+                vaga.setLinha(linha);
+                vaga.setColuna(String.valueOf(coluna));
+                
+                novaSessao.getVagas().add(vaga); 
+            }
+        }
+        
+        return novaSessao;
+    }}
+

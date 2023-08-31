@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public abstract class Vaga {
     
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -48,23 +49,21 @@ public abstract class Vaga {
 	public int getLinha() {
 		return linha;
 	}
-	public void setLinha(int linha) {
-		this.linha = linha;
+	public void setLinha(int string) {
+		this.linha = string;
 	}
 	public boolean isOcupado() {
 		return ocupado;
 	}
-	
+	public void setOcupado(boolean ocupado) {
+		this.ocupado = ocupado;
+	}
 	public Sessao getSessao() {
 		return sessao;
 	}
 	public void setSessao(Sessao sessao) {
 		this.sessao = sessao;
 	}
-	public void setOcupado(boolean ocupado) {
-		this.ocupado = ocupado;
-	}
-
     
     
     

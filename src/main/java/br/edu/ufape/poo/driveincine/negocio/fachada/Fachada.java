@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
@@ -26,6 +27,9 @@ public class Fachada {
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
     }
+    public  List<Sessao> procurarSessaoPeloFilme(Filme filme) {
+        return cadastroSessao.procurarSessoesPelofilme(filme);
+    }
 
     public List<Sessao> listarTodasSessoes() {
         return cadastroSessao.listarTodasSessoes();
@@ -46,9 +50,11 @@ public class Fachada {
     public Vaga procurarVagaPeloId(long id) {
         return cadastroVaga.procurarVagaPeloId(id);
     }
-    public Vaga salvarVaga(Vaga vaga, long sessaoId) throws SessaoNaoExisteException {
-    	return cadastroVaga.salvarVaga(vaga, sessaoId);
+
+    public Vaga salvarVaga(Vaga vaga) {
+        return cadastroVaga.salvarVaga(vaga);
     }
+
     public void removerVaga(Long id) throws VagaNãoExisteException {
         cadastroVaga.removerVagaPorId(id);
     }
@@ -56,8 +62,5 @@ public class Fachada {
     public Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException {
         return cadastroVaga.atualizarStatusVaga(id, ocupado);
     }
-
-
 }
-
 
