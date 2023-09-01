@@ -26,11 +26,19 @@ public class CadastroFilme {
         return colecaoFilme.findByTitulo(titulo);
     }
 
-    public Filme salvarFilme(Filme entity) {
-        return colecaoFilme.save(entity);
+    public Filme salvarFilme(Filme entity) throws FilmeJaExisteException {
+    	Filme f = procurarFilmePeloTitulo(entity.getTitulo());
+    	if (f == null) {
+    		return colecaoFilme.save(entity);
+        }
+        throw new FilmeJaExisteException(entity.getTitulo());
     }
 
-    public void excluirFilme(Filme entity) {
+    public void excluirFilme(Filme entity) throws FilmeNaoExisteException {
+    	Filme f = procurarFilmePeloTitulo(entity.getTitulo());
+    	if(f == null) {
+    		throw new FilmeNaoExisteException(entity.getTitulo());
+    	}
         colecaoFilme.delete(entity);
     }
 }
