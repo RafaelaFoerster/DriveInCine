@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeJaExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeNaoExisteException;
+
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoFilme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 
@@ -26,11 +29,19 @@ public class CadastroFilme {
         return colecaoFilme.findByTitulo(titulo);
     }
 
-    public Filme salvarFilme(Filme entity) {
-        return colecaoFilme.save(entity);
+    public Filme salvarFilme(Filme entity) throws FilmeJaExisteException {
+    	Filme f = procurarFilmePeloTitulo(entity.getTitulo());
+    	if (f == null) {
+    		return colecaoFilme.save(entity);
+        }
+        throw new FilmeJaExisteException(entity.getTitulo());
     }
 
-    public void excluirFilme(Filme entity) {
+    public void excluirFilme(Filme entity) throws FilmeNaoExisteException {
+    	Filme f = procurarFilmePeloTitulo(entity.getTitulo());
+    	if(f == null) {
+    		throw new FilmeNaoExisteException(entity.getTitulo());
+    	}
         colecaoFilme.delete(entity);
     }
 }
