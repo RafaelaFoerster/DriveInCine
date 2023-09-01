@@ -18,7 +18,7 @@ public class CadastroFilme {
         return colecaoFilme.findAll();
     }
 
-    public Optional<Filme> procurarFilmePeloId(Long id) {
+    public Optional<Filme> procurarSessoesPelofilme(Long id) {
         return colecaoFilme.findById(id);
     }
 

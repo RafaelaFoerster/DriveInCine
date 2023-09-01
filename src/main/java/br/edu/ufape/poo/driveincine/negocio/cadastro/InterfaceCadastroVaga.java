@@ -9,7 +9,7 @@ public interface InterfaceCadastroVaga {
 
     Vaga procurarVagaPeloId(long id);
 
-    Vaga salvarVaga(Vaga vaga, long sessaoId) throws SessaoNaoExisteException;
+    Vaga salvarVaga(Vaga entity);
 
     void removerVagaPorId(long id) throws VagaNãoExisteException;
 
