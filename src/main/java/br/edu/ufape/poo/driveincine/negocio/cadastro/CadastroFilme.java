@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeJaExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeNaoExisteException;
+
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoFilme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 
