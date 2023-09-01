@@ -18,7 +18,9 @@ public class Funcionario extends Pessoa {
 	    private boolean ativo;
 	    private String login;
 	    private String senha;
-
+	    
+	    public Funcionario() {}
+	    
 	    public Funcionario(String nome, String rg, String cpf, String endereco, String telefone, String dataNasc,
 	    String cargo, String horarioTrabalho, double salario, String login, String senha, long id) {
 	        super(id, rg, cpf, endereco, telefone, dataNasc, nome);

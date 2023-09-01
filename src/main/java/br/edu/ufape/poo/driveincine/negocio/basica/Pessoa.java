@@ -20,6 +20,8 @@ public class Pessoa {
 	private String dataNasc;
 	private String nome;
 	
+	public Pessoa() {}
+	
 	public Pessoa(long id, String rg, String cpf, String endereco, String telefone, String dataNasc2, String nome) {
 		super();
 		this.id = id;

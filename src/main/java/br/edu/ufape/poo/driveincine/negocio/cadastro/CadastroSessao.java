@@ -50,9 +50,9 @@ public class CadastroSessao implements InterfaceCadastroSessao {
         return temSessao;
     }
     
-    public List<Sessao> procurarSessoesPelofilme(Filme filme) {
-        return colecaoSessao.findByFilme(filme);
-    }
+//    public List<Sessao> procurarSessoesPelofilme(Filme filme) {
+//        return colecaoSessao.findByFilme(filme);
+//    }
    
     public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException, SessaoNaoExisteException {
         List<Sessao> sessoesExistentes = procurarSessoesPeloHorarioEData(sessao.getHorario(), sessao.getDiaExibicao());

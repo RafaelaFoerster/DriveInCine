@@ -22,6 +22,8 @@ import jakarta.persistence.OneToMany;
 		private String protagonistas;
 		private String genero;
 		
+		@OneToMany
+		private List<Sessao> sessoes;
 	 
 	    public Filme() {
 	    	

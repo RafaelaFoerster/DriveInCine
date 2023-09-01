@@ -43,9 +43,9 @@ public class Fachada {
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
     }
-    public  List<Sessao> procurarSessaoPeloFilme(Filme filme) {
-        return cadastroSessao.procurarSessoesPelofilme(filme);
-    }
+//    public  List<Sessao> procurarSessaoPeloFilme(Filme filme) {
+//        return cadastroSessao.procurarSessoesPelofilme(filme);
+//    }
 
     public List<Sessao> listarTodasSessoes() {
         return cadastroSessao.listarTodasSessoes();

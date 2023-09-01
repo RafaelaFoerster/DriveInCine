@@ -16,5 +16,5 @@ public interface InterfaceColecaoSessao extends JpaRepository<Sessao, Long> {
     List<Sessao> findByDiaExibicao(String diaExibicao);
     List<Sessao> findByHorario(float horario);
 
-	List<Sessao> findByFilme(Filme filme);
+	//List<Sessao> findByFilme(Filme filme);
 }
