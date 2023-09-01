@@ -8,21 +8,30 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoCompra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.CompraNaoExisteException;
 
 @Service
-public class CadastroCompra implements InterfaceCadastroCompra{
+public class CadastroCompra implements InterfaceCadastroCompra {
 	@Autowired
 	private InterfaceColecaoCompra colecaoCompra;
 	
-	public List<Compra> listarCompras() {
-		return colecaoCompra.findAll();
+	public List<Compra> listarCompras() 
+		throws CompraNaoExisteException {
+			List<Compra> comp = colecaoCompra.findAll();
+			if(comp.size() == 0) {
+				throw new CompraNaoExisteException();
+			}
+			return comp;
 	}
 
 	public Compra salvarCompra(Compra entity) {
 		return colecaoCompra.save(entity);
 	}
 
-	public void removerCompra(Long id) {
+	public void removerCompraId(Long id) throws CompraNaoExisteException {
+		if(!colecaoCompra.existsById(id)) {
+			throw new CompraNaoExisteException();
+		}
 		colecaoCompra.deleteById(id);
 	}
 
@@ -30,7 +39,11 @@ public class CadastroCompra implements InterfaceCadastroCompra{
 		colecaoCompra.delete(entity);
 	}
 	
-	public Optional<Compra> procurarCompraId(long id) {
-		return colecaoCompra.findById(id);
+	public Compra procurarCompraId(long id) throws CompraNaoExisteException {
+		Compra temCompra = colecaoCompra.findById(id).orElse(null);
+		if(temCompra != null) {
+			throw new CompraNaoExisteException();
+		}
+		return temCompra;
 	}
 }

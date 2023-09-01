@@ -28,7 +28,10 @@ public class CadastroIngresso implements InterfaceCadastroIngresso {
 			return ing;
 		}
 
-	public void removerIngresso(Long id) {
+	public void removerIngressoId(Long id) throws IngressoNaoExisteException {
+		if (!colecaoIngresso.existsById(id)) {
+			throw new IngressoNaoExisteException();
+		}
 		colecaoIngresso.deleteById(id);
 	}
 
@@ -36,7 +39,11 @@ public class CadastroIngresso implements InterfaceCadastroIngresso {
 		colecaoIngresso.delete(entity);
 	}
 	
-	public Optional<Ingresso> procurarIngressoId(long id) {
-		return colecaoIngresso.findById(id);
+	public Ingresso procurarIngressoId(long id) throws IngressoNaoExisteException {
+		Ingresso temIngresso = colecaoIngresso.findById(id).orElse(null);
+		if (temIngresso != null) {
+			throw new IngressoNaoExisteException();
+		}
+		return temIngresso;
 	}
 }

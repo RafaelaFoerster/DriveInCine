@@ -1,12 +1,14 @@
 package br.edu.ufape.poo.driveincine.negocio.fachada;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import br.edu.ufape.poo.driveincine.dto.IngressoDto;
 import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
@@ -20,6 +22,7 @@ import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteE
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.CompraNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteException;
 
 @Service
@@ -40,9 +43,9 @@ public class Fachada {
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
     }
-    public  List<Sessao> procurarSessaoPeloFilme(Filme filme) {
-        return cadastroSessao.procurarSessoesPelofilme(filme);
-    }
+//    public  List<Sessao> procurarSessaoPeloFilme(Filme filme) {
+//        return cadastroSessao.procurarSessoesPelofilme(filme);
+//    }
 
     public List<Sessao> listarTodasSessoes() {
         return cadastroSessao.listarTodasSessoes();
@@ -52,11 +55,11 @@ public class Fachada {
         cadastroSessao.excluirSessao(id);
     }
 
-    public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) {
+    public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) throws SessaoNaoExisteException {
         return cadastroSessao.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
 
-    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
+    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException, SessaoNaoExisteException {
         return cadastroSessao.salvarSessao(sessao);
     }
 
@@ -90,37 +93,75 @@ public class Fachada {
 				return ing;
 			}
 
-	public void removerIngresso(Long id) {
-		cadastroIngresso.removerIngresso(id);
+	public void removerIngressoId(Long id) throws IngressoNaoExisteException {
+		cadastroIngresso.removerIngressoId(id);
 	}
 
 	public void removerIngresso(Ingresso entity) {
 		cadastroIngresso.removerIngresso(entity);
 	}
 	
-	public Optional<Ingresso> procurarIngressoId(long id) {
+	public Ingresso procurarIngressoId(long id) throws IngressoNaoExisteException {
 		return cadastroIngresso.procurarIngressoId(id);
 	}
 	
-	public List<Compra> listarCompras() {
-		return cadastroCompra.listarCompras();
-	}
+	public List<Compra> listarCompras() 
+			throws CompraNaoExisteException {
+				List<Compra> comp = cadastroCompra.listarCompras();
+				if(comp.size() == 0) {
+					throw new CompraNaoExisteException();
+				}
+				return comp;
+		}
 
 	public Compra salvarCompra(Compra entity) {
 		return cadastroCompra.salvarCompra(entity);
 	}
 
-	public void removerCompra(Long id) {
-		cadastroCompra.removerCompra(id);
+	public void removerCompraId(Long id) throws CompraNaoExisteException {
+		cadastroCompra.removerCompraId(id);
 	}
 
 	public void removerCompra(Compra entity) {
 		cadastroCompra.removerCompra(entity);
 	}
 	
-	public Optional<Compra> procurarCompraId(long id) {
+	public Compra procurarCompraId(long id) throws CompraNaoExisteException {
 		return cadastroCompra.procurarCompraId(id);
 	}
-
+	
+	public List<Ingresso> comprarIngresso(IngressoDto ing) {
+		Sessao sess = cadastroSessao.procurarSessaoPeloId(ing.getSessao());
+		List<Vaga> vagas = new ArrayList<Vaga>();
+		List<Ingresso> ingressosGerados = new ArrayList<Ingresso>();
+		double valorTotal=0;
+		
+		for (int i=0; i<ing.getVagas().size();i++) {
+			Vaga vagaTemp = cadastroVaga.procurarVagaPeloId(i);
+			vagas.add(vagaTemp);
+			valorTotal+=vagaTemp.getValor();
+			vagaTemp.setOcupado(true);
+		}
+		
+		//gerando compra
+		Compra compra = new Compra();
+		compra.setStatus("Aprovado");
+		Date data = new Date();
+		compra.setDataEmissao(data);
+		compra.setValorTotal(valorTotal);
+		
+		//gerando Ingresso por vaga
+		for (int i=0; i<vagas.size();i++) {
+			Ingresso novo = new Ingresso();
+			novo.setQrcode("1234");
+			novo.setPlacaDoCarro(ing.getPlacaDoCarro());
+			novo.setSessao(sess);
+			novo.setCompra(compra);
+			novo.setVaga(vagas.get(i));
+			
+			ingressosGerados.add(novo);
+			cadastroIngresso.salvarIngresso(novo);
+		}
+		return ingressosGerados;
+	}
 }
-

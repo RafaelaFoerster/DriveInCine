@@ -7,6 +7,9 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 	import jakarta.persistence.OneToMany;
 	import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 	@Entity
 	public class Cinema {
 	    @Id
@@ -15,6 +18,7 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 	    private String nome;
 
 	    @OneToMany
+	    @Cascade(CascadeType.ALL)
 	    private List<Filme> filmes;
 	    
 	    public Cinema() {
@@ -37,5 +41,4 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 		        this.filmes = filmes;
 		    }
 	}
-
 

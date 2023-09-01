@@ -15,10 +15,10 @@ public interface InterfaceCadastroSessao {
 
     void excluirSessao(long Id) throws SessaoNaoExisteException;
 
-    List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao);
+    List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) throws SessaoNaoExisteException;
 
-    Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException;
+    Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException, SessaoNaoExisteException;
 
-	 List<Sessao> procurarSessoesPelofilme(Filme filme);
+//	 List<Sessao> procurarSessoesPelofilme(Filme filme);
 
 }
