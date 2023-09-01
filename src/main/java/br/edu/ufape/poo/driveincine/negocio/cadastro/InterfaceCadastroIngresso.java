@@ -16,5 +16,5 @@ public interface InterfaceCadastroIngresso {
 
 	void removerIngresso(Ingresso entity);
 
-	Optional<Ingresso> procurarIngressoId(long id) throws IngressoNaoExisteException;
+	Ingresso procurarIngressoId(long id) throws IngressoNaoExisteException;
 }

@@ -16,5 +16,5 @@ public interface InterfaceCadastroCompra {
 
 	void removerCompra(Compra entity);
 
-	Optional<Compra> procurarCompraId(long id) throws CompraNaoExisteException;
+	Compra procurarCompraId(long id) throws CompraNaoExisteException;
 }

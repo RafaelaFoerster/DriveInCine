@@ -11,7 +11,7 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.CompraNaoExisteException;
 
 @Service
-public class CadastroCompra {
+public class CadastroCompra implements InterfaceCadastroCompra {
 	@Autowired
 	private InterfaceColecaoCompra colecaoCompra;
 	
@@ -39,10 +39,11 @@ public class CadastroCompra {
 		colecaoCompra.delete(entity);
 	}
 	
-	public Optional<Compra> procurarCompraId(long id) throws CompraNaoExisteException {
-		if(!colecaoCompra.existsById(id)) {
+	public Compra procurarCompraId(long id) throws CompraNaoExisteException {
+		Compra temCompra = colecaoCompra.findById(id).orElse(null);
+		if(temCompra != null) {
 			throw new CompraNaoExisteException();
 		}
-		return colecaoCompra.findById(id);
+		return temCompra;
 	}
 }

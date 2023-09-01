@@ -32,12 +32,12 @@ public class SessaoController {
 	
 	@PostMapping("/sessao")
 	public Sessao cadastrarSessao(@RequestBody Sessao u) 
-			throws SessaoJaExistenteException{
+			throws SessaoJaExistenteException, SessaoNaoExisteException{
 			return fachada.salvarSessao(u);
 	}
 	
 	@PatchMapping("/sessao/{id}")
-	public Sessao atualizarSessao(@PathVariable long id, @RequestBody Sessao u) throws SessaoJaExistenteException{
+	public Sessao atualizarSessao(@PathVariable long id, @RequestBody Sessao u) throws SessaoJaExistenteException, SessaoNaoExisteException {
 		u.setId(id);
 		return fachada.salvarSessao(u);
 	}

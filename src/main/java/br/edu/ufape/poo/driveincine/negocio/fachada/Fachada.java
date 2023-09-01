@@ -51,11 +51,11 @@ public class Fachada {
         cadastroSessao.excluirSessao(id);
     }
 
-    public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) {
+    public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) throws SessaoNaoExisteException {
         return cadastroSessao.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
 
-    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
+    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException, SessaoNaoExisteException {
         return cadastroSessao.salvarSessao(sessao);
     }
 
@@ -94,7 +94,7 @@ public class Fachada {
 		cadastroIngresso.removerIngresso(entity);
 	}
 	
-	public Optional<Ingresso> procurarIngressoId(long id) throws IngressoNaoExisteException {
+	public Ingresso procurarIngressoId(long id) throws IngressoNaoExisteException {
 		return cadastroIngresso.procurarIngressoId(id);
 	}
 	
@@ -119,7 +119,7 @@ public class Fachada {
 		cadastroCompra.removerCompra(entity);
 	}
 	
-	public Optional<Compra> procurarCompraId(long id) throws CompraNaoExisteException {
+	public Compra procurarCompraId(long id) throws CompraNaoExisteException {
 		return cadastroCompra.procurarCompraId(id);
 	}
 	
