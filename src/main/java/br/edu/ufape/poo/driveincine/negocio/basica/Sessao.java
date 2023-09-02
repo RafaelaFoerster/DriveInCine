@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.driveincine.negocio.basica;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Sessao {
 	@ManyToOne
 	private Filme filme;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vaga> vagas;
 
 	public Sessao() {

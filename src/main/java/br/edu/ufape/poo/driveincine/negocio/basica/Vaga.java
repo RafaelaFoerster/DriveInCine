@@ -12,17 +12,14 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public abstract class Vaga {
     
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String coluna;
     private int linha;
     private boolean ocupado;
-    
-    @ManyToOne
-    @JoinColumn(name = "sessao_id")
-    private Sessao sessao;
+
 
     public Vaga() {
         
@@ -58,13 +55,10 @@ public abstract class Vaga {
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
-	public Sessao getSessao() {
-		return sessao;
+	
+
+		
 	}
-	public void setSessao(Sessao sessao) {
-		this.sessao = sessao;
-	}
+	
     
     
-    
-}

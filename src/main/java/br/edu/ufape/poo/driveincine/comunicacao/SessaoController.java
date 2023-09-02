@@ -1,6 +1,8 @@
 package br.edu.ufape.poo.driveincine.comunicacao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,18 +37,23 @@ public class SessaoController {
 
     @PostMapping("/sessao")
     public Sessao salvarSessao(@RequestBody Sessao sessao) throws SessaoJaExistenteException {
-        return fachada.salvarSessao(sessao);
+    	Sessao sessaovagas= fachada.criarVagasParaSessao(sessao);
+    	
+    	Sessao sessaoSalva = fachada.salvarSessao(sessaovagas);
+        return sessaoSalva;
     }
 
-    //@GetMapping("/sessao/filme/{filmeId}")
-    //public List<Sessao> buscarSessoesPorFilme(@PathVariable Long filmeId) {
-        //Filme filme = fachada.procurarFilmePeloId(filmeId);
-        //return fachada.procurarSessoesPelofilme(filme);
-    //}
+    @GetMapping("/sessao/{titulo}")
+    public List<Sessao> buscarSessoesPorFilme(@PathVariable String titulo) {
+        Filme filme = fachada.procurarFilmePeloTitulo(titulo);
+        return fachada.procurarSessoesPeloFilme(filme);
+    }
 
     @GetMapping("/sessao/horario-data/{horario}/{diaExibicao}")
     public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable float horario, @PathVariable String diaExibicao) {
         return fachada.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
+    
+    
 }
 
