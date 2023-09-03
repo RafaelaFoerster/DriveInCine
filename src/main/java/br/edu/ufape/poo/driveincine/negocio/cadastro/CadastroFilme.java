@@ -25,12 +25,12 @@ public class CadastroFilme implements InterfaceCadastroFilme{
         return colecaoFilme.findByTitulo(titulo);
     }
 
-    public Filme salvarFilme(Filme entity) throws FilmeJaExisteException {
-    	Filme f = procurarFilmePeloTitulo(entity.getTitulo());
+    public Filme salvarFilme(Filme filme) throws FilmeJaExisteException {
+    	Filme f = procurarFilmePeloTitulo(filme.getTitulo());
     	if (f == null) {
-    		return colecaoFilme.save(entity);
+    		return colecaoFilme.save(filme);
         }
-        throw new FilmeJaExisteException(entity.getTitulo());
+        throw new FilmeJaExisteException(filme.getTitulo());
     }
 
     public void excluirFilme(String titulo) throws FilmeNaoExisteException {

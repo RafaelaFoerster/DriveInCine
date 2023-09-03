@@ -31,8 +31,10 @@ public class FilmeController {
         return fachada.salvarFilme(filme);
     }
 
-    @DeleteMapping("/entity")
+    @DeleteMapping("/filme")
     public void excluirFilmePorEntidade(@RequestBody String titulo) throws FilmeNaoExisteException {
     	fachada.excluirFilme(titulo);
     }
+    
+    
 }

@@ -142,8 +142,8 @@ public class Fachada {
         return cadastroFilme.procurarFilmePeloTitulo(titulo);
     }
 
-    public Filme salvarFilme(Filme entity) throws FilmeJaExisteException {
-        return cadastroFilme.salvarFilme(entity);
+    public Filme salvarFilme(Filme filme) throws FilmeJaExisteException {
+        return cadastroFilme.salvarFilme(filme);
     }
 
     public void excluirFilme(String titulo) throws FilmeNaoExisteException {
@@ -179,6 +179,12 @@ public class Fachada {
 
     }
     
+    public Sessao AddFilmeSessao(Sessao sessao ,String titulo) {
+    	Filme filme = cadastroFilme.procurarFilmePeloTitulo(titulo);
+    	sessao.setFilme(filme);
+    	
+    	return sessao;
+    }
 }
     
 

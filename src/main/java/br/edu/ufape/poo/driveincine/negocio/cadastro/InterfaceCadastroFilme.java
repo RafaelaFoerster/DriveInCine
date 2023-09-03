@@ -12,7 +12,7 @@ public interface InterfaceCadastroFilme {
 
     Filme procurarFilmePeloTitulo(String titulo);
 
-    Filme salvarFilme(Filme entity) throws FilmeJaExisteException;
+    Filme salvarFilme(Filme filme) throws FilmeJaExisteException;
 
     void excluirFilme(String titulo) throws FilmeNaoExisteException;
 

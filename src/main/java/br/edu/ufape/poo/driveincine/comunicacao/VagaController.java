@@ -59,5 +59,6 @@ public class VagaController {
     public Vaga atualizarStatusVaga(@PathVariable Long id, @PathVariable boolean ocupado) throws VagaOcupadaException {
         return fachada.atualizarStatusVaga(id, ocupado);
     }
+ 
     
 }

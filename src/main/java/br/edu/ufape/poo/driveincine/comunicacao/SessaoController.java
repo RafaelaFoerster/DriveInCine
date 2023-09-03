@@ -35,10 +35,10 @@ public class SessaoController {
         return fachada.listarTodasSessoes();
     }
 
-    @PostMapping("/sessao")
-    public Sessao salvarSessao(@RequestBody Sessao sessao) throws SessaoJaExistenteException {
+    @PostMapping("/sessao/{titulo}")
+    public Sessao salvarSessao(@RequestBody Sessao sessao,@PathVariable String titulo) throws SessaoJaExistenteException {
     	Sessao sessaovagas= fachada.criarVagasParaSessao(sessao);
-    	
+    	sessaovagas = fachada.AddFilmeSessao(sessaovagas,titulo );
     	Sessao sessaoSalva = fachada.salvarSessao(sessaovagas);
         return sessaoSalva;
     }
