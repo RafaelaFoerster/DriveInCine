@@ -2,6 +2,9 @@ package br.edu.ufape.poo.driveincine.negocio.basica;
 
 	import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Entity;
 	import jakarta.persistence.GeneratedValue;
 	import jakarta.persistence.GenerationType;
@@ -22,6 +25,9 @@ import jakarta.persistence.OneToMany;
 		private String protagonistas;
 		private String genero;
 		
+		@OneToMany
+		@Cascade(CascadeType.ALL)
+		private List<Sessao> sessoes;
 	 
 	    public Filme() {
 	    	
@@ -93,4 +99,3 @@ import jakarta.persistence.OneToMany;
 		
 		
 }
-

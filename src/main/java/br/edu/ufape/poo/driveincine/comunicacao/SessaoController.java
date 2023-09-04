@@ -34,7 +34,7 @@ public class SessaoController {
     public List<Sessao> listarTodasSessoes() {
         return fachada.listarTodasSessoes();
     }
-
+  
     @PostMapping("/sessao/{titulo}")
     public Sessao salvarSessao(@RequestBody Sessao sessao,@PathVariable String titulo) throws SessaoJaExistenteException {
     	Sessao sessaovagas= fachada.criarVagasParaSessao(sessao);
@@ -50,10 +50,9 @@ public class SessaoController {
     }
 
     @GetMapping("/sessao/horario-data/{horario}/{diaExibicao}")
-    public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable float horario, @PathVariable String diaExibicao) {
+    public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable float horario, @PathVariable String diaExibicao) throws SessaoNaoExisteException {
         return fachada.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
     
     
 }
-

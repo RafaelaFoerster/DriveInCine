@@ -62,4 +62,3 @@ public class CadastroVaga implements InterfaceCadastroVaga {
     
     }
 
-

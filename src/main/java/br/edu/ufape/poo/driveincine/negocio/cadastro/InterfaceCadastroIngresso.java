@@ -12,9 +12,9 @@ public interface InterfaceCadastroIngresso {
 
 	List<Ingresso> listarIngressos() throws IngressoNaoExisteException;
 
-	void removerIngresso(Long id);
+	void removerIngressoId(Long id) throws IngressoNaoExisteException;
 
 	void removerIngresso(Ingresso entity);
 
-	Optional<Ingresso> procurarIngressoId(long id);
+	Ingresso procurarIngressoId(long id) throws IngressoNaoExisteException;
 }

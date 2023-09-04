@@ -4,6 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Ingresso {
@@ -12,8 +17,19 @@ public class Ingresso {
 	private long id;
 	private String qrcode;
 	private String placaDoCarro;
-	private float valorDoIngresso;
 	
+	@OneToOne
+	@Cascade(CascadeType.ALL)
+	private Compra compra;
+	@OneToOne
+	@Cascade(CascadeType.ALL)
+	private Vaga vaga;
+	@ManyToOne
+	@Cascade(CascadeType.ALL)
+    @JoinColumn(name = "sessao_id")
+	private Sessao sessao;
+	
+
 	public Ingresso() {
 		
 	}
@@ -22,7 +38,6 @@ public class Ingresso {
 		super();
 		this.qrcode = qrcode;
 		this.placaDoCarro = placaDoCarro;
-		this.valorDoIngresso = valorDoIngresso;
 	}
 	public long getId() {
 		return id;
@@ -42,10 +57,27 @@ public class Ingresso {
 	public void setPlacaDoCarro(String placaDoCarro) {
 		this.placaDoCarro = placaDoCarro;
 	}
-	public float getValorDoIngresso() {
-		return valorDoIngresso;
+	public Compra getCompra() {
+		return compra;
 	}
-	public void setValorDoIngresso(float valorDoIngresso) {
-		this.valorDoIngresso = valorDoIngresso;
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
+	}
+
+	public Vaga getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(Vaga vaga) {
+		this.vaga = vaga;
+	}
+
+	public Sessao getSessao() {
+		return sessao;
+	}
+
+	public void setSessao(Sessao sessao) {
+		this.sessao = sessao;
 	}
 }
