@@ -19,6 +19,6 @@ public interface InterfaceCadastroSessao {
 
     Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException, SessaoNaoExisteException;
 
-//	 List<Sessao> procurarSessoesPelofilme(Filme filme);
+    List<Sessao> procurarSessoesPelofilme(Filme filme);
 
 }
