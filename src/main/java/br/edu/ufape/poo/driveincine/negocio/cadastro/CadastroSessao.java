@@ -61,28 +61,8 @@ public class CadastroSessao implements InterfaceCadastroSessao {
         }
 
         Sessao novaSessao = colecaoSessao.save(sessao);
-
-        novaSessao.setVagas(new ArrayList<>()); 
-
-        char[] colunas = {'A', 'B', 'C', 'D', 'E'};
-        
-        for (int linha = 1; linha <= 6; linha++) {
-            for (char coluna : colunas) {
-                Vaga vaga;
-                if (coluna == 'A' || coluna == 'B') {
-                    vaga = new VagaFront();
-                } else {
-                    vaga = new VagaNormal();
-                }
-                vaga.setSessao(novaSessao); 
-                
-                cadastroVaga.salvarVaga(vaga); 
-                vaga.setLinha(linha);
-                vaga.setColuna(String.valueOf(coluna));
-                
-                novaSessao.getVagas().add(vaga); 
-            }
-        }
-        
         return novaSessao;
     }}
+    }
+    
+    }

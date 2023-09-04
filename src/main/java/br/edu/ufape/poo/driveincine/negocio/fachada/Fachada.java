@@ -14,15 +14,20 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
+import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
+import br.edu.ufape.poo.driveincine.negocio.basica.VagaNormal;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroIngresso;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroVaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroCompra;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroFilme;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.CompraNaoExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeJaExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteException;
 
 @Service
@@ -39,13 +44,16 @@ public class Fachada {
     
 	@Autowired
 	private InterfaceCadastroCompra cadastroCompra;
+	
+	@Autowired InterfaceCadastroFilme cadastroFilme;
 
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
     }
-//    public  List<Sessao> procurarSessaoPeloFilme(Filme filme) {
-//        return cadastroSessao.procurarSessoesPelofilme(filme);
-//    }
+
+    public  List<Sessao> procurarSessoesPeloFilme(Filme filme) {
+        return cadastroSessao.procurarSessoesPelofilme(filme);
+    }
 
     public List<Sessao> listarTodasSessoes() {
         return cadastroSessao.listarTodasSessoes();
@@ -79,6 +87,9 @@ public class Fachada {
         return cadastroVaga.atualizarStatusVaga(id, ocupado);
     }
 
+    public List<Vaga> ListaVagas() {
+		return cadastroVaga.ListaVagas();
+	}
     
 	public Ingresso salvarIngresso(Ingresso entity) {
 		return cadastroIngresso.salvarIngresso(entity);
@@ -165,3 +176,57 @@ public class Fachada {
 		return ingressosGerados;
 	}
 }
+
+    public List<Filme> listarFilmes() {
+        return cadastroFilme.listarFilmes();
+    }
+
+    public Filme procurarFilmePeloTitulo(String titulo) {
+        return cadastroFilme.procurarFilmePeloTitulo(titulo);
+    }
+
+    public Filme salvarFilme(Filme filme) throws FilmeJaExisteException {
+        return cadastroFilme.salvarFilme(filme);
+    }
+
+    public void excluirFilme(String titulo) throws FilmeNaoExisteException {
+        cadastroFilme.excluirFilme(titulo);
+        
+    }
+    
+    
+    
+    
+    public Sessao criarVagasParaSessao(Sessao sessao) throws SessaoJaExistenteException {
+        char[] colunas = {'A', 'B', 'C', 'D', 'E'};
+        
+        List<Vaga> vagas = new ArrayList<>();
+
+        for (int linha = 1; linha <= 6; linha++) {
+            for (char coluna : colunas) {
+                Vaga vaga;
+                if (coluna == 'A' || coluna == 'B') {
+                    vaga = new VagaFront();
+                } else {
+                    vaga = new VagaNormal();
+                }
+                vaga.setLinha(linha);
+                vaga.setColuna(String.valueOf(coluna));
+                cadastroVaga.salvarVaga(vaga);
+                vagas.add(vaga);
+            }
+        }
+        
+        sessao.setVagas(vagas); 
+        return sessao;
+
+    }
+    
+    public Sessao AddFilmeSessao(Sessao sessao ,String titulo) {
+    	Filme filme = cadastroFilme.procurarFilmePeloTitulo(titulo);
+    	sessao.setFilme(filme);
+    	
+    	return sessao;
+    }
+}
+    

@@ -1,5 +1,7 @@
 package br.edu.ufape.poo.driveincine.negocio.cadastro;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,15 @@ import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaExcepti
 @Service
 public class CadastroVaga implements InterfaceCadastroVaga {
 	
+	
+
 	@Autowired
     private InterfaceColecaoVaga colecaoVaga;
-    
+	
+    public List<Vaga> ListaVagas() {
+		return colecaoVaga.findAll();
+	}
+
     
     public Vaga procurarVagaPeloId(long id) {
         return colecaoVaga.findById(id).orElse(null);
@@ -30,7 +38,8 @@ public class CadastroVaga implements InterfaceCadastroVaga {
         }
         colecaoVaga.deleteById(id);
     }
-
+    
+    
     public Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException {
         Vaga vaga = colecaoVaga.findById(id).orElse(null);
         if (vaga == null) {
