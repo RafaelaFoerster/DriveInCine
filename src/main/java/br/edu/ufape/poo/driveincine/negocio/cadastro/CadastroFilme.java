@@ -25,6 +25,10 @@ public class CadastroFilme implements InterfaceCadastroFilme{
         return colecaoFilme.findByTitulo(titulo);
     }
 
+	public Filme procurarFilmePeloId(long id) {
+		return colecaoFilme.findById(id).orElse(null);
+	}
+    
     public Filme salvarFilme(Filme filme) throws FilmeJaExisteException {
     	Filme f = procurarFilmePeloTitulo(filme.getTitulo());
     	if (f == null) {
@@ -42,4 +46,5 @@ public class CadastroFilme implements InterfaceCadastroFilme{
         
         colecaoFilme.delete(filme);
     }
+
 }

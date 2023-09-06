@@ -4,7 +4,7 @@ import java.util.List;
 
 public class IngressoDto {
 	private String placaDoCarro;
-	private List<Integer> vagas;
+	private int[] vagas;
 	private int sessao;
 	
 	public String getPlacaDoCarro() {
@@ -13,10 +13,10 @@ public class IngressoDto {
 	public void setPlacaDoCarro(String placaDoCarro) {
 		this.placaDoCarro = placaDoCarro;
 	}
-	public List<Integer> getVagas() {
+	public int[] getVagas() {
 		return vagas;
 	}
-	public void setVagas(List<Integer> vagas) {
+	public void setVagas(int[] vagas) {
 		this.vagas = vagas;
 	}
 	public int getSessao() {

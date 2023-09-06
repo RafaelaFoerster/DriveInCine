@@ -44,9 +44,7 @@ public class CadastroSessao implements InterfaceCadastroSessao {
 
     public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) throws SessaoNaoExisteException {
     	List<Sessao> temSessao = colecaoSessao.findByHorarioAndDiaExibicao(horario, diaExibicao);
-    	if(temSessao.isEmpty()) {
-    		throw new SessaoNaoExisteException();
-    	}
+    
         return temSessao;
     }
     
