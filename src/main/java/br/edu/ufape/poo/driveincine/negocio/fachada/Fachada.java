@@ -165,7 +165,6 @@ public class Fachada {
 		for (int i=0; i<vagas.size();i++) {
 			Ingresso novo = new Ingresso();
 			novo.setQrcode("1234");
-			novo.setPlacaDoCarro(ing.getPlacaDoCarro());
 			novo.setSessao(sess);
 			novo.setCompra(compra);
 			novo.setVaga(vagas.get(i));
