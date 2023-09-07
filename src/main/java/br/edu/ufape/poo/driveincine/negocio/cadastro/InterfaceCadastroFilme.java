@@ -12,11 +12,12 @@ public interface InterfaceCadastroFilme {
 
     List<Filme> listarFilmes();
 
+	Filme procurarFilmePeloId(long id);
+
     Filme procurarFilmePeloTitulo(String titulo);
 
     Filme salvarFilme(Filme filme) throws FilmeJaExisteException;
-
     void excluirFilme(String titulo) throws FilmeNaoExisteException;
-   Filme  procurarFilmePeloId(long id);
+
 
 }

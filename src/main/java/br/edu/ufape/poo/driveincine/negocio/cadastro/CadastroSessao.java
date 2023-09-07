@@ -47,6 +47,7 @@ public class CadastroSessao implements InterfaceCadastroSessao {
     
     public List<Sessao> procurarSessoesPeloHorarioEData(String horario, String diaExibicao) {
     	List<Sessao> temSessao = colecaoSessao.findByHorarioAndDiaExibicao(horario, diaExibicao);
+
         return temSessao;
     }
     

@@ -147,8 +147,8 @@ public class Fachada {
 		List<Ingresso> ingressosGerados = new ArrayList<Ingresso>();
 		double valorTotal=0;
 		
-		for (int i=0; i<ing.getVagas().size();i++) {
-			Vaga vagaTemp = cadastroVaga.procurarVagaPeloId(i);
+		for (int i=0; i<ing.getVagas().length;i++) {
+			Vaga vagaTemp = cadastroVaga.procurarVagaPeloId(ing.getVagas()[i]);
 			vagas.add(vagaTemp);
 			valorTotal+=vagaTemp.getValor();
 			vagaTemp.setOcupado(true);
@@ -165,7 +165,6 @@ public class Fachada {
 		for (int i=0; i<vagas.size();i++) {
 			Ingresso novo = new Ingresso();
 			novo.setQrcode("1234");
-			novo.setPlacaDoCarro(ing.getPlacaDoCarro());
 			novo.setSessao(sess);
 			novo.setCompra(compra);
 			novo.setVaga(vagas.get(i));
@@ -178,7 +177,6 @@ public class Fachada {
 	   public Filme ProcurarFilmepeloId(Long id) {
 			return cadastroFilme.procurarFilmePeloId(id);
 		}
-
 
     public List<Filme> listarFilmes() {
         return cadastroFilme.listarFilmes();
@@ -196,8 +194,6 @@ public class Fachada {
         cadastroFilme.excluirFilme(titulo);
         
     }
-    
-    
     
     
     public Sessao criarVagasParaSessao(Sessao sessao) throws SessaoJaExistenteException {
@@ -225,8 +221,8 @@ public class Fachada {
 
     }
     
-    public Sessao AddFilmeSessao(Sessao sessao ,String titulo) {
-    	Filme filme = cadastroFilme.procurarFilmePeloTitulo(titulo);
+    public Sessao AddFilmeSessao(Sessao sessao ,long id) {
+    	Filme filme = cadastroFilme.procurarFilmePeloId(id);
     	sessao.setFilme(filme);
     	
     	return sessao;
