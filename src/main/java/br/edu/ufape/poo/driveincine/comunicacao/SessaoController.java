@@ -36,22 +36,21 @@ public class SessaoController {
     }
   
     @PostMapping("/sessao/{titulo}")
-    public Sessao salvarSessao(@RequestBody Sessao sessao,@PathVariable String titulo) throws SessaoJaExistenteException, SessaoNaoExisteException {
+    public Sessao salvarSessao(@RequestBody Sessao sessao,@PathVariable String titulo) throws SessaoJaExistenteException{
     	Sessao sessaovagas= fachada.criarVagasParaSessao(sessao);
     	sessaovagas = fachada.AddFilmeSessao(sessaovagas,titulo );
     	Sessao sessaoSalva = fachada.salvarSessao(sessaovagas);
         return sessaoSalva;
     }
 
-    @GetMapping("/sessao/{titulo}")
-    public List<Sessao> buscarSessoesPorFilme(@PathVariable String titulo) {
-        Filme filme = fachada.procurarFilmePeloTitulo(titulo);
-        return fachada.procurarSessoesPeloFilme(filme);
-    }
-
     @GetMapping("/sessao/horario-data/{horario}/{diaExibicao}")
-    public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable float horario, @PathVariable String diaExibicao) throws SessaoNaoExisteException {
+    public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable String horario, @PathVariable String diaExibicao) throws SessaoNaoExisteException {
         return fachada.procurarSessoesPeloHorarioEData(horario, diaExibicao);
+    }
+    
+    @GetMapping("/sessao/filme/{idFilme}")
+    public List<Sessao> buscarSessoesPorIdFilme(@PathVariable Long idFilme) {
+        return fachada.procurarSessoesPorIdFilme(idFilme);
     }
     
     
