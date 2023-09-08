@@ -224,5 +224,12 @@ public class Fachada {
     	
     	return sessao;
     }
+    
+    public List<Vaga> procurarSessaoPelaVaga(long id) {
+    	Sessao sessao = cadastroSessao.procurarSessaoPeloId(id);
+    	List<Vaga> vagas = sessao.getVagas();
+		return vagas;
+    	
+    }
 }
     
