@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
+import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.fachada.Fachada;
@@ -49,10 +50,15 @@ public class SessaoController {
         return fachada.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
     
+    @GetMapping("/sessao/vagas/{id}")
+    public List<Vaga> procurarSessaoPelaVaga(@PathVariable long id) {
+    	return fachada.procurarSessaoPelaVaga(id);
+    }
+  
     @GetMapping("/sessao/filme/{idFilme}")
     public List<Sessao> buscarSessoesPorFilme(@PathVariable Long idFilme) {
         return fachada.procurarSessoesPorIdFilme(idFilme);
     }
-    
+
     
 }
