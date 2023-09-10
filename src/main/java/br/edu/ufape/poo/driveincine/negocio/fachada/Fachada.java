@@ -229,6 +229,14 @@ public class Fachada {
     }
     
 
+    public List<Vaga> procurarSessaoPelaVaga(long id) {
+    	Sessao sessao = cadastroSessao.procurarSessaoPeloId(id);
+    	List<Vaga> vagas = sessao.getVagas();
+		return vagas;
+    	
+    }
+}
+
     
     
     public List<Sessao> procurarSessoesPorIdFilme(long idFilme) {
