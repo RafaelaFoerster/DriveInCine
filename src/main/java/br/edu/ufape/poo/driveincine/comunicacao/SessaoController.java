@@ -44,14 +44,8 @@ public class SessaoController {
         return sessaoSalva;
     }
 
-    @GetMapping("/sessao/{titulo}")
-    public List<Sessao> buscarSessoesPorFilme(@PathVariable String titulo) {
-        Filme filme = fachada.procurarFilmePeloTitulo(titulo);
-        return fachada.procurarSessoesPeloFilme(filme);
-    }
-
     @GetMapping("/sessao/horario-data/{horario}/{diaExibicao}")
-    public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable float horario, @PathVariable String diaExibicao) throws SessaoNaoExisteException {
+    public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable String horario, @PathVariable String diaExibicao) throws SessaoNaoExisteException {
         return fachada.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
     
@@ -59,5 +53,11 @@ public class SessaoController {
     public List<Vaga> procurarSessaoPelaVaga(@PathVariable long id) {
     	return fachada.procurarSessaoPelaVaga(id);
     }
+  
+    @GetMapping("/sessao/filme/{idFilme}")
+    public List<Sessao> buscarSessoesPorFilme(@PathVariable Long idFilme) {
+        return fachada.procurarSessoesPorIdFilme(idFilme);
+    }
+
     
 }

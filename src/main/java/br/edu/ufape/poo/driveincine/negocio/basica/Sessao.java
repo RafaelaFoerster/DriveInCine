@@ -17,7 +17,7 @@ public class Sessao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private float horario;
+	private String horario;
 	private String diaExibicao;
 	
 	@ManyToOne
@@ -30,7 +30,7 @@ public class Sessao {
 
 	}
 
-	public Sessao(long id, float horario, String diaExibicao) {
+	public Sessao(long id, String horario, String diaExibicao) {
 		this.id = id;
 		this.horario = horario;
 		this.diaExibicao = diaExibicao;
@@ -45,11 +45,11 @@ public class Sessao {
 		this.id = id;
 	}
 
-	public float getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(float horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 

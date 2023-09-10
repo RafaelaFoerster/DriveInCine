@@ -46,14 +46,14 @@ public class Fachada {
 	private InterfaceCadastroCompra cadastroCompra;
 	
 	@Autowired InterfaceCadastroFilme cadastroFilme;
+	
+	
 
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
     }
 
-    public  List<Sessao> procurarSessoesPeloFilme(Filme filme) {
-        return cadastroSessao.procurarSessoesPelofilme(filme);
-    }
+    
 
     public List<Sessao> listarTodasSessoes() {
         return cadastroSessao.listarTodasSessoes();
@@ -63,11 +63,11 @@ public class Fachada {
         cadastroSessao.excluirSessao(id);
     }
 
-    public List<Sessao> procurarSessoesPeloHorarioEData(float horario, String diaExibicao) throws SessaoNaoExisteException {
+    public List<Sessao> procurarSessoesPeloHorarioEData(String horario, String diaExibicao){
         return cadastroSessao.procurarSessoesPeloHorarioEData(horario, diaExibicao);
     }
 
-    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException, SessaoNaoExisteException {
+    public Sessao salvarSessao(Sessao sessao) throws SessaoJaExistenteException {
         return cadastroSessao.salvarSessao(sessao);
     }
 
@@ -174,6 +174,9 @@ public class Fachada {
 		}
 		return ingressosGerados;
 	}
+	   public Filme ProcurarFilmepeloId(Long id) {
+			return cadastroFilme.procurarFilmePeloId(id);
+		}
 
     public List<Filme> listarFilmes() {
         return cadastroFilme.listarFilmes();
@@ -225,6 +228,7 @@ public class Fachada {
     	return sessao;
     }
     
+
     public List<Vaga> procurarSessaoPelaVaga(long id) {
     	Sessao sessao = cadastroSessao.procurarSessaoPeloId(id);
     	List<Vaga> vagas = sessao.getVagas();
@@ -232,4 +236,15 @@ public class Fachada {
     	
     }
 }
+
+    
+    
+    public List<Sessao> procurarSessoesPorIdFilme(long idFilme) {
+        return cadastroSessao.procurarSessoesPorIdFilme(idFilme);
+    }
+    
+    
+    
+    
+    }
     

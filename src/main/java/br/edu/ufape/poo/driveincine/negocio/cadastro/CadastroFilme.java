@@ -8,14 +8,17 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.driveincine.dados.InterfaceColecaoFilme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
+import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeJaExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeNaoExisteException;
 
 @Service
 public class CadastroFilme implements InterfaceCadastroFilme{
-    @Autowired
+   
+
+	@Autowired
     private InterfaceColecaoFilme colecaoFilme;
-    
+  
 
     public List<Filme> listarFilmes() {
         return colecaoFilme.findAll();
