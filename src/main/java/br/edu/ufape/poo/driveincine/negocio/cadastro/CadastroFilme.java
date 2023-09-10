@@ -18,6 +18,7 @@ public class CadastroFilme implements InterfaceCadastroFilme{
 
 	@Autowired
     private InterfaceColecaoFilme colecaoFilme;
+
   
 
     public List<Filme> listarFilmes() {

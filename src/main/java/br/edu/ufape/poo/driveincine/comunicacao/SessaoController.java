@@ -35,13 +35,14 @@ public class SessaoController {
         return fachada.listarTodasSessoes();
     }
   
-    @PostMapping("/sessao/{id}")
+    @PostMapping("/savesessao/{id}")
     public Sessao salvarSessao(@RequestBody Sessao sessao,@PathVariable long id) throws SessaoJaExistenteException, SessaoNaoExisteException {
     	Sessao sessaovagas= fachada.criarVagasParaSessao(sessao);
     	sessaovagas = fachada.AddFilmeSessao(sessaovagas,id );
     	Sessao sessaoSalva = fachada.salvarSessao(sessaovagas);
         return sessaoSalva;
     }
+    
 
     @GetMapping("/sessao/horario-data/{horario}/{diaExibicao}")
     public List<Sessao> buscarSessoesPorHorarioEData(@PathVariable String horario, @PathVariable String diaExibicao) throws SessaoNaoExisteException {

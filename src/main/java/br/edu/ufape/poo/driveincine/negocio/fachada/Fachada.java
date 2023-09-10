@@ -228,8 +228,12 @@ public class Fachada {
     	return sessao;
     }
     
-
     
+    public long PegarIdFilme(String titulo) {
+    	Filme filme = cadastroFilme.procurarFilmePeloTitulo(titulo);
+    	long id = filme.getid();
+    	return(id);
+    }
     
     public List<Sessao> procurarSessoesPorIdFilme(long idFilme) {
         return cadastroSessao.procurarSessoesPorIdFilme(idFilme);
