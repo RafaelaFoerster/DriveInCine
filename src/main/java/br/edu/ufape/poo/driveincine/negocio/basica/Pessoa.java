@@ -8,17 +8,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Pessoa {
+public abstract class Pessoa {
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id; 
 	private String rg; 
 	private String cpf;
-	private String endereco;
-	
 	private String telefone; 
 	private String dataNasc;
 	private String nome;
+	
+	
 	
 	public Pessoa() {}
 	
@@ -27,9 +29,56 @@ public class Pessoa {
 		this.id = id;
 		this.rg = rg;
 		this.cpf = cpf;
-		this.endereco = endereco;
 		this.telefone = telefone;
 		this.dataNasc = dataNasc2;
+		this.nome = nome;
+		
+	}
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getDataNasc() {
+		return dataNasc;
+	}
+
+	public void setDataNasc(String dataNasc) {
+		this.dataNasc = dataNasc;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	

@@ -47,13 +47,21 @@ public class Fachada {
 	
 	@Autowired InterfaceCadastroFilme cadastroFilme;
 	
-	
 
     public Sessao procurarSessaoPeloId(long id) {
         return cadastroSessao.procurarSessaoPeloId(id);
     }
 
+    public List <Vaga> listarVagasPorSessao(long idSessao){
+    	Sessao sessao = cadastroSessao.procurarSessaoPeloId(idSessao);
+    	 List<Vaga> vagas = sessao.getVagas();
+   	 return vagas ;
+   }
     
+    
+    public void deleteFilme(long id) {
+    	cadastroFilme.deleteFilme(id);
+    }
 
     public List<Sessao> listarTodasSessoes() {
         return cadastroSessao.listarTodasSessoes();
@@ -243,9 +251,8 @@ public class Fachada {
     
     public List<Sessao> procurarSessoesPorIdFilme(long idFilme) {
         return cadastroSessao.procurarSessoesPorIdFilme(idFilme);
+           
     }
-    
-    
     
     
     }

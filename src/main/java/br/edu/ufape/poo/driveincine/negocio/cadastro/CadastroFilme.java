@@ -16,10 +16,13 @@ import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeNaoExisteExce
 public class CadastroFilme implements InterfaceCadastroFilme{
    
 
+	
 	@Autowired
     private InterfaceColecaoFilme colecaoFilme;
 
-  
+	public void deleteFilme(Long id) {
+		colecaoFilme.deleteById(id);
+	}
 
     public List<Filme> listarFilmes() {
         return colecaoFilme.findAll();
@@ -40,6 +43,8 @@ public class CadastroFilme implements InterfaceCadastroFilme{
         }
         throw new FilmeJaExisteException(filme.getTitulo());
     }
+    
+    
 
     public void excluirFilme(String titulo) throws FilmeNaoExisteException {
         Filme filme = procurarFilmePeloTitulo(titulo);

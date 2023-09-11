@@ -11,13 +11,14 @@ import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.FilmeNaoExisteExce
 public interface InterfaceCadastroFilme {
 
     List<Filme> listarFilmes();
-
+    void deleteFilme(Long id);
 	Filme procurarFilmePeloId(long id);
 
     Filme procurarFilmePeloTitulo(String titulo);
 
     Filme salvarFilme(Filme filme) throws FilmeJaExisteException;
     void excluirFilme(String titulo) throws FilmeNaoExisteException;
+
 
 
 }

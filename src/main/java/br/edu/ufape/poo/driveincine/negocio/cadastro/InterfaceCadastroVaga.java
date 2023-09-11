@@ -13,10 +13,11 @@ public interface InterfaceCadastroVaga {
 
     Vaga salvarVaga(Vaga entity);
 
-    void removerVagaPorId(long id) throws VagaNãoExisteException;
+    void removerVagaPorId(Long id) throws VagaNãoExisteException;
 
-    Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException;
+    Vaga atualizarStatusVaga(Long id, boolean ocupado) throws VagaOcupadaException;
     
     public List<Vaga> ListaVagas();
-
+    
+ 
 }

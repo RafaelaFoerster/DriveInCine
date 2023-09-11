@@ -39,7 +39,8 @@ public class VagaController {
     public VagaFront salvarVagaFront(@RequestBody VagaFront vaga){
         return (VagaFront) fachada.salvarVaga(vaga);
     }
-
+    
+    
     @GetMapping("/vaga/{id}")
     public Vaga buscarVagaPorId(@PathVariable Long id) {
         return fachada.procurarVagaPeloId(id);
@@ -49,7 +50,13 @@ public class VagaController {
     public List<Vaga> ListaVagas() {
         return fachada.ListaVagas();
     }
-
+    
+    @GetMapping("/vaga/sessao/{id}")
+    public List <Vaga> listarVagasPorSessao(@PathVariable Long id){
+   	 return fachada.listarVagasPorSessao(id);
+    }
+    
+    
     @DeleteMapping("/vaga/{id}")
     public void removerVaga(@PathVariable Long id) throws VagaNãoExisteException {
         fachada.removerVaga(id);

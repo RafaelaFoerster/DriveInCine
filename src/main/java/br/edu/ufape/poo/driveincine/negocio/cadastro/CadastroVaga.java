@@ -32,7 +32,7 @@ public class CadastroVaga implements InterfaceCadastroVaga {
         return colecaoVaga.findById(id).orElse(null);
     }
 
-    public void removerVagaPorId(long id) throws VagaNãoExisteException {
+    public void removerVagaPorId(Long id) throws VagaNãoExisteException {
         if (!colecaoVaga.existsById(id)) {
             throw new VagaNãoExisteException();
         }
@@ -40,7 +40,7 @@ public class CadastroVaga implements InterfaceCadastroVaga {
     }
     
     
-    public Vaga atualizarStatusVaga(long id, boolean ocupado) throws VagaOcupadaException {
+    public Vaga atualizarStatusVaga(Long id, boolean ocupado) throws VagaOcupadaException {
         Vaga vaga = colecaoVaga.findById(id).orElse(null);
         if (vaga == null) {
         }
@@ -60,5 +60,9 @@ public class CadastroVaga implements InterfaceCadastroVaga {
         return colecaoVaga.save(vaga);
     }
     
-    }
+
+}
+    
+    
+    
 
