@@ -13,16 +13,20 @@ import br.edu.ufape.poo.driveincine.negocio.basica.Filme;
 import br.edu.ufape.poo.driveincine.negocio.basica.Compra;
 import br.edu.ufape.poo.driveincine.negocio.basica.Ingresso;
 import br.edu.ufape.poo.driveincine.negocio.basica.Sessao;
+import br.edu.ufape.poo.driveincine.negocio.basica.Usuario;
 import br.edu.ufape.poo.driveincine.negocio.basica.Vaga;
 import br.edu.ufape.poo.driveincine.negocio.basica.VagaFront;
 import br.edu.ufape.poo.driveincine.negocio.basica.VagaNormal;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroIngresso;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroSessao;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroUsuario;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroVaga;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroCompra;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.InterfaceCadastroFilme;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoJaExistenteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.SessaoNaoExisteException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.UsuarioDuplicadoException;
+import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.UsuarioNaoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaNãoExisteException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.VagaOcupadaException;
 import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.CompraNaoExisteException;
@@ -33,7 +37,8 @@ import br.edu.ufape.poo.driveincine.negocio.cadastro.excecoes.IngressoNaoExisteE
 @Service
 public class Fachada {
 
-    @Autowired
+
+	@Autowired
     private InterfaceCadastroSessao cadastroSessao;
 
     @Autowired
@@ -46,6 +51,8 @@ public class Fachada {
 	private InterfaceCadastroCompra cadastroCompra;
 	
 	@Autowired InterfaceCadastroFilme cadastroFilme;
+	
+	@Autowired InterfaceCadastroUsuario cadastroUsuario;
 	
 
     public Sessao procurarSessaoPeloId(long id) {
@@ -253,7 +260,44 @@ public class Fachada {
         return cadastroSessao.procurarSessoesPorIdFilme(idFilme);
            
     }
-    
-    
+    public Usuario procurarUsuarioEmail(String email) throws UsuarioNaoExisteException {
+        return cadastroUsuario.procurarUsuarioEmail(email);
     }
+
+    public Usuario salvarUsuario(Usuario entity) throws UsuarioDuplicadoException {
+        return cadastroUsuario.salvarUsuario(entity);
+    }
+
+    public List<Usuario> listarUsuarios() {
+        return cadastroUsuario.listarUsuarios();
+    }
+
+    public boolean verificarExistenciaUsuarioId(Long id) {
+        return cadastroUsuario.verificarExistenciaUsuarioId(id);
+    }
+
+    public Usuario localizarUsuarioId(Long id) {
+        return cadastroUsuario.localizarUsuarioId(id);
+    }
+
+    public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
+        cadastroUsuario.removerUsuarioEmail(email);
+    }
+    
+
+    public List<Ingresso> ListarIngressoDoUsuario(long idUsuario) throws UsuarioNaoExisteException {
+        Usuario usuario = cadastroUsuario.localizarUsuarioId(idUsuario);
+        if (usuario == null) {
+            throw new UsuarioNaoExisteException(null);
+        }
+        
+        return usuario.getIngressos();
+    }
+
+	}
+	
+
+	
+    
+    
     
